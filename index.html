@@ -306,9 +306,26 @@ function render(f){
 render('all');
 document.querySelectorAll('[data-f]').forEach(t=>t.addEventListener('click',()=>{
   document.querySelectorAll('[data-f]').forEach(x=>x.setAttribute('aria-pressed',x===t));render(t.dataset.f);paintBooks()}));
-const API='https://api.counterapi.dev/v1/falkalil-kitab/';
+const NS='falkalil-book';
 const fmt=n=>Number(n).toLocaleString('ar-SA');
-const hit=(k,up)=>fetch(API+k+(up?'/up':'/'),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()).then(j=>j.count??0);
+const AB='https://abacus.jasoncameron.dev/';
+let jp=0;
+function jsonp(url){return new Promise((res,rej)=>{const cb='__ab'+(++jp);const sc=document.createElement('script');
+  const t=setTimeout(()=>{cleanup();rej()},8000);
+  function cleanup(){clearTimeout(t);try{delete window[cb]}catch(e){window[cb]=undefined}sc.remove()}
+  window[cb]=d=>{cleanup();res(d)};sc.onerror=()=>{cleanup();rej()};
+  sc.src=url+(url.includes('?')?'&':'?')+'callback='+cb;document.head.appendChild(sc)})}
+async function abacus(k,up){
+  const url=AB+(up?'hit/':'get/')+NS+'/'+k;
+  try{const r=await fetch(url,{cache:'no-store'});
+    if(r.status===404)return 0;
+    if(r.ok){const j=await r.json();return j.value??0}
+  }catch(e){}
+  try{const j=await jsonp(url);if(j&&typeof j.value==='number')return j.value}catch(e){}
+  if(!up)return 0;throw 0}
+async function counterapi(k,up){const r=await fetch('https://api.counterapi.dev/v1/'+NS+'/'+k+(up?'/up':'/'),{cache:'no-store'});
+  if(!r.ok)throw 0;const j=await r.json();return j.count??0}
+const hit=(k,up)=>abacus(k,up).catch(()=>counterapi(k,up));
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 const today=new Date().toISOString().slice(0,10);
 const firstToday=store.get('kv-day')!==today;
