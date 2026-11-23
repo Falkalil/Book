@@ -81,6 +81,7 @@ nav ul a:hover,nav ul a:focus-visible{background:rgba(255,255,255,.12);opacity:1
 .dl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
 .dl a{display:flex;align-items:center;justify-content:center;gap:7px;min-height:44px;border-radius:11px;text-decoration:none;font-weight:800;font-size:14.5px;border:1px solid var(--line);background:var(--bg)}
 .dl a svg{width:18px;height:18px;flex:none}
+.dl a:nth-child(4):last-child{grid-column:1/-1}
 .dl a.main{grid-column:1/-1;background:var(--teal);color:#fff;border-color:var(--teal)}
 .dl a:hover{border-color:var(--mint)}
 .dl a.main:hover{background:var(--teal2)}
@@ -285,6 +286,7 @@ for(let g=1;g<=6;g++){
   const sp=g===5?'':'grade'+g+'/';
   books.push({s:'science',g,name:'العلوم',url:`https://falkalil.github.io/science5/${sp}`,
     file:`https://github.com/Falkalil/science5/raw/main/${sp}download/science${g}.apk`,fileLbl:'تحميل APK',icon:'i-and',
+    off:`https://github.com/Falkalil/science5/raw/main/${sp}download/science${g}-offline.zip`,
     gh:`https://github.com/Falkalil/science5/tree/main/${g===5?'':'grade'+g}`});
   const mp=g===6?'':'grade'+g+'/';
   books.push({s:'math',g,name:'الرياضيات',url:`https://falkalil.github.io/math/${mp}`,
@@ -302,6 +304,7 @@ function render(f){
     <div class="dl">
       <a class="main" href="${b.url}" target="_blank" rel="noopener"><svg><use href="#i-open"/></svg>رابط مباشر</a>
       <a href="${b.file}" target="_blank" rel="noopener" data-dl="${b.s}${b.g}"><svg><use href="#${b.icon}"/></svg>${b.fileLbl}<span class="n" data-n="${b.s}${b.g}"></span></a>
+      ${b.off?`<a href="${b.off}" target="_blank" rel="noopener" title="ملف واحد يُفتح في المتصفح دون إنترنت بعد فك الضغط"><svg><use href="#i-open"/></svg>دون إنترنت</a>`:''}
       <a href="${b.gh}" target="_blank" rel="noopener"><svg><use href="#i-gh"/></svg>GitHub</a>
     </div>
   </article>`).join('');
