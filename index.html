@@ -291,6 +291,7 @@ for(let g=1;g<=6;g++){
   const mp=g===6?'':'grade'+g+'/';
   books.push({s:'math',g,name:'الرياضيات',url:`https://falkalil.github.io/math/${mp}`,
     file:`https://github.com/Falkalil/math/raw/main/download/math${g}.apk`,fileLbl:'تحميل APK',icon:'i-and',
+    off:`https://github.com/Falkalil/math/raw/main/download/math${g}-offline.zip`,
     gh:`https://github.com/Falkalil/math/tree/main/${g===6?'':'grade'+g}`});
 }
 const shelfOrder=[...books].sort((a,b)=>a.g-b.g||(a.s>b.s?-1:1));
