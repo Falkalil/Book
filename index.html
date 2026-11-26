@@ -14,7 +14,7 @@
 :root{color-scheme:light dark;
 --bg:light-dark(#f6f1e7,#0b1d24);--paper:light-dark(#fffdf8,#12303a);--ink:light-dark(#14262d,#eef3f1);--mute:light-dark(#5b6b70,#9fb4b5);
 --teal:#0f3a4a;--teal2:#167a7f;--mint:#0da9a6;--gold:#e9d9a0;--wood:#8a5a36;--line:light-dark(#e6dcc8,#1f4552);
---sci:#2f9e6e;--math:#2f7fbf}
+--sci:#2f9e6e;--math:#2f7fbf;--ar:#8a3ab8}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
@@ -161,7 +161,7 @@ footer small{display:block;opacity:.6;margin-top:16px;font-size:14px}
 </div></nav>
 
 <header class="hero" id="top"><div class="wrap">
-  <span class="kick">العلوم والرياضيات · الفصل الدراسي الأول</span>
+  <span class="kick">العلوم والرياضيات ولغتي · الفصل الدراسي الأول</span>
   <h1>الكتاب التفاعلي</h1>
   <p>كتبٌ تُقلَّب كالكتاب الورقي، وفي كل درسٍ شرحٌ تفاعلي وتمارين وألعاب ومجسّمات — من الصف الأول إلى السادس الابتدائي.</p>
   <div class="cta">
@@ -169,7 +169,7 @@ footer small{display:block;opacity:.6;margin-top:16px;font-size:14px}
     <a class="btn ghost" href="#video">شاهد المزايا</a>
   </div>
   <ul class="stats">
-    <li><b>١٢</b><span>كتابًا تفاعليًّا</span></li>
+    <li><b>١٨</b><span>كتابًا تفاعليًّا</span></li>
     <li><b>٦</b><span>صفوف دراسية</span></li>
     <li><b>٣</b><span>طرق للوصول</span></li>
     <li><b>١٠٠٪</b><span>يعمل دون إنترنت</span></li>
@@ -193,6 +193,7 @@ footer small{display:block;opacity:.6;margin-top:16px;font-size:14px}
       <button class="tab" data-f="all" aria-pressed="true">الكل</button>
       <button class="tab" data-f="science" aria-pressed="false">العلوم</button>
       <button class="tab" data-f="math" aria-pressed="false">الرياضيات</button>
+      <button class="tab" data-f="arabic" aria-pressed="false">لغتي</button>
     </div>
   </div>
   <div class="grid" id="grid"></div>
@@ -252,7 +253,7 @@ footer small{display:block;opacity:.6;margin-top:16px;font-size:14px}
     </div>
     <div class="pane" id="p4" role="tabpanel" hidden>
       <ol class="steps">
-        <li><b>نزّل الملف</b><span>ملفات الرياضيات بصيغة HTML في <a href="https://github.com/Falkalil/math/tree/main/download" target="_blank" rel="noopener">مجلد download على GitHub</a>.</span></li>
+        <li><b>نزّل الملف</b><span>اضغط «دون إنترنت» تحت الكتاب، أو من مجلدات download على GitHub: <a href="https://github.com/Falkalil/math/tree/main/download" target="_blank" rel="noopener">الرياضيات</a> · <a href="https://github.com/Falkalil/arabic/tree/main/download" target="_blank" rel="noopener">لغتي</a>.</span></li>
         <li><b>احفظ الصفحة</b><span>من قائمة المتصفح اختر «حفظ باسم» أو «تنزيل الصفحة».</span></li>
         <li><b>انقله لأي جهاز</b><span>عبر الفلاش أو الواتساب أو البريد.</span></li>
         <li><b>افتحه بالمتصفح</b><span>يعمل الملف كاملًا دون إنترنت ودون تثبيت.</span></li>
@@ -272,7 +273,7 @@ footer small{display:block;opacity:.6;margin-top:16px;font-size:14px}
     <a class="wa" href="https://wa.me/966509230447" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>واتساب · <bdi dir="ltr">0509230447</bdi></a>
     <a class="tg" href="https://t.me/falkalil85" target="_blank" rel="noopener"><svg><use href="#i-tg"/></svg>تليجرام · <bdi dir="ltr">@falkalil85</bdi></a>
   </div>
-  <small>الكتاب التفاعلي · العلوم والرياضيات · الفصل الدراسي الأول ١٤٤٨هـ</small>
+  <small>الكتاب التفاعلي · العلوم والرياضيات ولغتي · الفصل الدراسي الأول ١٤٤٨هـ</small>
 </footer>
 <a class="float" href="https://wa.me/966509230447" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب"><svg style="color:#fff"><use href="#i-wa"/></svg></a>
 
@@ -291,14 +292,19 @@ for(let g=1;g<=6;g++){
     file:`https://github.com/Falkalil/math/raw/main/download/math${g}.apk`,fileLbl:'تحميل APK',icon:'i-and',
     off:`https://github.com/Falkalil/math/raw/main/download/math${g}-offline.zip`,
     gh:`https://github.com/Falkalil/math/tree/main/${g===6?'':'grade'+g}`});
+  books.push({s:'arabic',g,name:g>=4?'لغتي الجميلة':'لغتي',url:`https://falkalil.github.io/arabic/grade${g}/`,
+    file:`https://github.com/Falkalil/arabic/raw/main/download/arabic${g}.apk`,fileLbl:'تحميل APK',icon:'i-and',
+    off:`https://github.com/Falkalil/arabic/raw/main/download/arabic${g}-offline.zip`,
+    gh:`https://github.com/Falkalil/arabic/tree/main/grade${g}`});
 }
+const SO={science:0,math:1,arabic:2};
 const shelfOrder=[...books].sort((a,b)=>a.g-b.g||(a.s>b.s?-1:1));
 document.getElementById('shelf').innerHTML=shelfOrder.map(b=>`<a href="#books" title="${b.name} – الصف ${G[b.g-1]}"><img src="covers/${b.s}${b.g}.webp" alt="غلاف ${b.name} الصف ${G[b.g-1]}"></a>`).join('');
 const grid=document.getElementById('grid');
 function render(f){
-  grid.innerHTML=books.filter(b=>f==='all'||b.s===f).sort((a,b)=>(a.s===b.s?0:a.s==='science'?-1:1)||a.g-b.g).map(b=>`
+  grid.innerHTML=books.filter(b=>f==='all'||b.s===f).sort((a,b)=>(SO[a.s]-SO[b.s])||a.g-b.g).map(b=>`
   <article class="card">
-    <a class="cover" href="${b.url}" target="_blank" rel="noopener"><img loading="lazy" src="covers/${b.s}${b.g}.webp" alt="غلاف كتاب ${b.name} للصف ${G[b.g-1]}"><span class="badge" style="background:var(--${b.s==='science'?'sci':'math'})">${b.name}</span></a>
+    <a class="cover" href="${b.url}" target="_blank" rel="noopener"><img loading="lazy" src="covers/${b.s}${b.g}.webp" alt="غلاف كتاب ${b.name} للصف ${G[b.g-1]}"><span class="badge" style="background:var(--${b.s==='science'?'sci':b.s==='math'?'math':'ar'})">${b.name}</span></a>
     <h3>${b.name} — الصف ${G[b.g-1]}<small>الفصل الدراسي الأول · الجزء الأول</small></h3>
     <div class="dl">
       <a class="main" href="${b.url}" target="_blank" rel="noopener"><svg><use href="#i-open"/></svg>رابط مباشر</a>
